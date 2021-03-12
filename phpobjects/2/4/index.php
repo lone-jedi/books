@@ -1,7 +1,45 @@
 <?php
 
-    class ShopProduct
+    interface IPrintable
     {
+        public function write(string $str) : void;
+    }
+
+    trait TestWrite
+    {
+        public function testWrite()
+        {
+            echo 'Hello, it`s me - trait!';
+        }
+    }
+
+    trait TestHello
+    {
+        public function testHello()
+        {
+            echo 'Hello, username!';
+        }
+    }
+
+    abstract class ShopProductWriter
+    {
+        protected $products = [];
+
+        public function addProduct(ShopProduct $shopProduct)
+        {
+            $this->products[] = $shopProduct;
+        }
+
+        abstract public function __toString();
+    }
+
+    class ShopProduct extends ShopProductWriter implements IPrintable
+    {
+        use TestWrite, TestHello;
+
+        const AVAILABLE    = 0;
+        const OUT_OF_STOCK = 1;
+
         private int $id           = 0;
         private string $title     = '';
         private string $firstName = '';
@@ -15,6 +53,11 @@
             $this->firstName = $firstName;
             $this->mainName  = $mainName;
             $this->price     = $price;
+        }
+
+        public function write(string $str) : void
+        {
+            echo $this;
         }
 
         public function setId(int $id) : void
