@@ -11,10 +11,10 @@
         public function __construct(string $title, string $firstName, 
                                     string $mainName, float $price)
         {
-            $this->title = $title;
+            $this->title     = $title;
             $this->firstName = $firstName;
-            $this->mainName = $mainName;
-            $this->price = $price;
+            $this->mainName  = $mainName;
+            $this->price     = $price;
         }
 
         public function setId(int $id) : void
@@ -32,7 +32,12 @@
             <b>Price:</b> {$this->price}
             ";
         }
-
+        
+        /*
+        * Get instance BookProduct or CdProduct from DataBase
+        * @param int $id Id row
+        * @param PDO $pdo PDO Instance
+        */
         public static function getInstance(int $id, \PDO $pdo) : ShopProduct
         {
             $stmt   = $pdo->prepare("SELECT * FROM `products` WHERE id=?");
@@ -61,10 +66,9 @@
                     (int) $row['playlenght']
                 );
             } else {
-                $firstName = $row['firstname'] ?? "";
-                $product = new ShopProduct(
+                $product   = new ShopProduct(
                     $row['title'],
-                    $row['firstname'],
+                    $row['firstname'] ?? "",
                     $row['mainname'],
                     (float) $row['price'],
                 );
