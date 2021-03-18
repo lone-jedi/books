@@ -2,7 +2,10 @@
 
     class ShopProduct
     {
-
+        public function __construct()
+        {
+            
+        }
     }
 
     $product1 = new ShopProduct();
