@@ -39,7 +39,7 @@ abstract class Lesson
     }
 }
 
-// Лекции
+ // Лекции
 class Lecture extends Lesson
 {
 }
@@ -86,14 +86,3 @@ class FixedCostStrategy extends CostStrategy
     }
 }
 
-// 
-// Пример использования классов 
-//
-
-$lessons[] = new Seminar(4, new TimedCostStrategy());
-$lessons[] = new Lecture(4, new FixedCostStrategy());
-
-foreach($lessons as $lesson) {
-    print "Оплата за занятие {$lesson->cost()}. ";
-    print "Тип оплаты: {$lesson->chargeType()}<br>";
-}
